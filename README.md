@@ -18,6 +18,7 @@ first; the stage directories and [exploits/](exploits/) carry the work itself.
 | **What does recovery support?** | Recovery is partition-dependent; the matrix is below. LK fastboot is reachable, and its locked-device gate refuses every write and every `oem` command, `oem reboot-recovery` included. |
 | **Can a damaged unit be repaired?** | A bad `boot` (S1) recovers through recovery plus a newer OTA. A bad `lk` (S2), a damaged `preloader` (S3) or an unreadable eMMC (S4) need hardware. Matrix below. |
 | **Is root persistent?** | Yes. [stage4-persistent/](stage4-persistent/) restores root after a reboot with no host attached, measured over 13 consecutive reboots. It runs in userland and reverts with a factory reset. |
+| **Can root optimize the running tablet?** | [Stage 5](stage5-optimize/) adds bounded zRAM, VM experiments, optional telemetry UID filtering, privileged measurements and reversible debloating. Apply/restore paths were tested live; performance gains remain workload-dependent. This suite is on the `root-optimizations` branch. |
 
 What the repository holds: a verified reverse-engineering record of the boot chain, a
 proven brick taxonomy, worked refutations of several claims that circulate as folklore
@@ -79,6 +80,7 @@ is wrong, that is worth knowing.
 | **2; Bootloader unlock** | **dead end**: no method exists, and none is in prospect | extreme (brick) | [stage2-unlock/](stage2-unlock/) |
 | **3; Recovery & brick taxonomy** | characterised, but does not unlock further work | none (analysis + read-only) | [stage3-recovery/](stage3-recovery/) |
 | **4; Persistent root** | **working and measured**: root returns after reboot with no host attached; 13/13 boots | low (all state under `/data`, revertible) | [stage4-persistent/](stage4-persistent/) |
+| **5; Root optimization** | bounded zRAM, VM and UID-network trials, privileged measurements and reversible debloating | journaled changes; root tuning lasts for the current boot | [stage5-optimize/](stage5-optimize/) |
 
 ## Quick start
 
@@ -136,6 +138,22 @@ printf 'ls -la /dev/block/by-name/\nexit\n' | adb shell 'toybox nc -w 3 127.0.0.
 To have root come back by itself after a reboot, with no PC attached, add
 [stage 4](stage4-persistent/), see its README for the install steps and the
 `acceptance-test.ps1` harness that measures it over N reboots.
+
+### Optimize an already rooted tablet
+
+The `root-optimizations` branch includes [Stage 5](stage5-optimize/), using the
+existing uid-0 channel. Start with read-only assessment and a saved plan:
+
+```powershell
+python .\stage5-optimize\fireopt.py root-assess
+python .\stage5-optimize\fireopt.py root-plan --zram-mib 256
+```
+
+The [Stage 5 guide](stage5-optimize/README.md) covers apply, verification, conditional
+swap teardown and exact package/settings restoration. Commands preview changes until
+`--execute` is supplied. Root tuning lasts for the current boot; package disabled
+overrides persist across reboot. [Validation](docs/root-optimization-validation.md)
+records restored trials and a subsequent live application, with no performance claim.
 
 ### Expect: probabilistic leak, automatic retries
 
@@ -216,6 +234,7 @@ stage1-root/      SnuSnuRoot port for PS7319 (upstream work; see NOTICE)
 stage2-unlock/    Bootloader unlock research, mechanism reversed; no unlock exists
 stage3-recovery/  Brick taxonomy (S1–S4), LK fastboot access, experiment safety gates
 stage4-persistent/ Host-free persistent root, boot actor + carrier, all state under /data
+stage5-optimize/   Root runtime optimization, measurements, reversible debloat and tests
 exploits/         MT8183 exploit research: continuity anchor, rated exploit register,
                   boot-chain map, evidence under notes/ and tooling under tools/
 docs/             Technical context, brick analysis, handoff, references
@@ -231,6 +250,9 @@ Prose here reads as statements of what a thing is, and it uses no em dashes. Run
 rewrites them. `python exploits/tools/qa-docs.py` checks that every relative link in the
 headline documents resolves, and `python exploits/tools/id-sweep.py` refuses to pass if a
 device serial, MAC or personal path is present anywhere in the tree.
+
+`stage5-optimize/runs/` is **gitignored**: inventories, plans, samples and restoration
+journals stay local because they contain device identifiers and app inventories.
 
 `dumps/`, `OTAs/`, `ota-extract/`, `refs/` and `stage2a-unlock/` are **gitignored**:
 they hold partition images, multi-GB vendor packages and device-unique data that must

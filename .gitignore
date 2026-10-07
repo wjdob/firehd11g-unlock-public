@@ -61,6 +61,9 @@ stage2a-unlock*.zip
 # source. `sh stage4-persistent/app/build.sh` recreates it; committing it would
 # mean shipping a binary that can silently drift from the source preflight checks.
 stage4-persistent/app/build/
+
+# Private optimization inventories, plans, measurements and rollback journals.
+stage5-optimize/runs/
 # Frontier-model repository assessments. These are external critiques kept for
 # reference; they are not part of the repo's own claims and must not be published
 # (they quote private paths and internal reasoning). Kept out of git and out of
