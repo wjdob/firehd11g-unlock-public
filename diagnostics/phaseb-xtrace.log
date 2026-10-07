@@ -1,0 +1,523 @@
++ set -eu
++++ dirname -- ./scripts/reroot_after_boot.sh
+++ CDPATH=
+++ cd -- ./scripts/..
+++ pwd
++ repo_dir=/c/Users/<user>/firehd11g_unlock/stage1-root/port
++ adb_bin=/c/Users/<user>/adb/adb.exe
++ asset_dir=/data/user/0/com.amazon.webview.chromium/files/codex.amazon.jni.v51
++ probe_port=43271
++ nice_name=codex-system-amazon-v52
++ payload_device=./scripts/rootsvc_payload.sh
++ waiter_trigger='x[$(while :;do [ "$(getenforce)" ]&&break;sleep 1;done;nc -s 127.0.0.1 -p 4325 -L sh&)]000'
++ old_time_file=/data/local/tmp/__reroot_old_time
++ . /c/Users/<user>/firehd11g_unlock/stage1-root/port/scripts/carrier_abi.sh
+++ set -eu
++ . /c/Users/<user>/firehd11g_unlock/stage1-root/port/scripts/phase_b_status.sh
+++ PHASE_B_PRECHECK=20
+++ PHASE_B_CARRIER_START=21
+++ PHASE_B_VALIDATION=22
+++ PHASE_B_STATEFUL_SPENT=30
+++ PHASE_B_WAITER_STATE=40
+++ PHASE_B_POST_WRITE=50
++ '[' -n ./scripts/rootsvc_payload.sh ']'
++ '[' -f ./scripts/rootsvc_payload.sh ']'
++ stage_hdr '1/7 boot state'
++ echo
++ echo '== 1/7 boot state =='
+
+== 1/7 boot state ==
+++ seq 1 60
++ for i in $(seq 1 60)
+++ adb shell getprop sys.boot_completed
+++ tr -d '\r'
++ boot='++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1'
++ '[' '++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1' = 1 ']'
++ sleep 5
++ for i in $(seq 1 60)
+++ adb shell getprop sys.boot_completed
+++ tr -d '\r'
++ boot='++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1'
++ '[' '++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1' = 1 ']'
++ sleep 5
++ for i in $(seq 1 60)
+++ adb shell getprop sys.boot_completed
+++ tr -d '\r'
++ boot='++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1'
++ '[' '++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1' = 1 ']'
++ sleep 5
++ for i in $(seq 1 60)
+++ adb shell getprop sys.boot_completed
+++ tr -d '\r'
++ boot='++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1'
++ '[' '++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1' = 1 ']'
++ sleep 5
++ for i in $(seq 1 60)
+++ adb shell getprop sys.boot_completed
+++ tr -d '\r'
++ boot='++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1'
++ '[' '++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1' = 1 ']'
++ sleep 5
++ for i in $(seq 1 60)
+++ adb shell getprop sys.boot_completed
+++ tr -d '\r'
++ boot='++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1'
++ '[' '++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1' = 1 ']'
++ sleep 5
++ for i in $(seq 1 60)
+++ adb shell getprop sys.boot_completed
+++ tr -d '\r'
++ boot='++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1'
++ '[' '++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1' = 1 ']'
++ sleep 5
++ for i in $(seq 1 60)
+++ adb shell getprop sys.boot_completed
+++ tr -d '\r'
++ boot='++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1'
++ '[' '++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1' = 1 ']'
++ sleep 5
++ for i in $(seq 1 60)
+++ adb shell getprop sys.boot_completed
+++ tr -d '\r'
++ boot='++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1'
++ '[' '++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1' = 1 ']'
++ sleep 5
++ for i in $(seq 1 60)
+++ adb shell getprop sys.boot_completed
+++ tr -d '\r'
++ boot='++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1'
++ '[' '++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1' = 1 ']'
++ sleep 5
++ for i in $(seq 1 60)
+++ adb shell getprop sys.boot_completed
+++ tr -d '\r'
++ boot='++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1'
++ '[' '++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1' = 1 ']'
++ sleep 5
++ for i in $(seq 1 60)
+++ adb shell getprop sys.boot_completed
+++ tr -d '\r'
++ boot='++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1'
++ '[' '++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1' = 1 ']'
++ sleep 5
++ for i in $(seq 1 60)
+++ adb shell getprop sys.boot_completed
+++ tr -d '\r'
++ boot='++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1'
++ '[' '++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1' = 1 ']'
++ sleep 5
++ for i in $(seq 1 60)
+++ adb shell getprop sys.boot_completed
+++ tr -d '\r'
++ boot='++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1'
++ '[' '++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1' = 1 ']'
++ sleep 5
++ for i in $(seq 1 60)
+++ adb shell getprop sys.boot_completed
+++ tr -d '\r'
++ boot='++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1'
++ '[' '++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1' = 1 ']'
++ sleep 5
++ for i in $(seq 1 60)
+++ adb shell getprop sys.boot_completed
+++ tr -d '\r'
++ boot='++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1'
++ '[' '++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1' = 1 ']'
++ sleep 5
++ for i in $(seq 1 60)
+++ adb shell getprop sys.boot_completed
+++ tr -d '\r'
++ boot='++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1'
++ '[' '++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1' = 1 ']'
++ sleep 5
++ for i in $(seq 1 60)
+++ adb shell getprop sys.boot_completed
+++ tr -d '\r'
++ boot='++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1'
++ '[' '++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1' = 1 ']'
++ sleep 5
++ for i in $(seq 1 60)
+++ adb shell getprop sys.boot_completed
+++ tr -d '\r'
++ boot='++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1'
++ '[' '++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1' = 1 ']'
++ sleep 5
++ for i in $(seq 1 60)
+++ adb shell getprop sys.boot_completed
+++ tr -d '\r'
++ boot='++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1'
++ '[' '++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1' = 1 ']'
++ sleep 5
++ for i in $(seq 1 60)
+++ adb shell getprop sys.boot_completed
+++ tr -d '\r'
++ boot='++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1'
++ '[' '++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1' = 1 ']'
++ sleep 5
++ for i in $(seq 1 60)
+++ adb shell getprop sys.boot_completed
+++ tr -d '\r'
++ boot='++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1'
++ '[' '++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1' = 1 ']'
++ sleep 5
++ for i in $(seq 1 60)
+++ adb shell getprop sys.boot_completed
+++ tr -d '\r'
++ boot='++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1'
++ '[' '++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1' = 1 ']'
++ sleep 5
++ for i in $(seq 1 60)
+++ adb shell getprop sys.boot_completed
+++ tr -d '\r'
++ boot='++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1'
++ '[' '++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1' = 1 ']'
++ sleep 5
++ for i in $(seq 1 60)
+++ adb shell getprop sys.boot_completed
+++ tr -d '\r'
++ boot='++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1'
++ '[' '++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1' = 1 ']'
++ sleep 5
++ for i in $(seq 1 60)
+++ adb shell getprop sys.boot_completed
+++ tr -d '\r'
++ boot='++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1'
++ '[' '++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1' = 1 ']'
++ sleep 5
++ for i in $(seq 1 60)
+++ adb shell getprop sys.boot_completed
+++ tr -d '\r'
++ boot='++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1'
++ '[' '++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1' = 1 ']'
++ sleep 5
++ for i in $(seq 1 60)
+++ adb shell getprop sys.boot_completed
+++ tr -d '\r'
++ boot='++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1'
++ '[' '++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1' = 1 ']'
++ sleep 5
++ for i in $(seq 1 60)
+++ adb shell getprop sys.boot_completed
+++ tr -d '\r'
++ boot='++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1'
++ '[' '++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1' = 1 ']'
++ sleep 5
++ for i in $(seq 1 60)
+++ adb shell getprop sys.boot_completed
+++ tr -d '\r'
++ boot='++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1'
++ '[' '++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1' = 1 ']'
++ sleep 5
++ for i in $(seq 1 60)
+++ adb shell getprop sys.boot_completed
+++ tr -d '\r'
++ boot='++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1'
++ '[' '++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1' = 1 ']'
++ sleep 5
++ for i in $(seq 1 60)
+++ adb shell getprop sys.boot_completed
+++ tr -d '\r'
++ boot='++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1'
++ '[' '++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1' = 1 ']'
++ sleep 5
++ for i in $(seq 1 60)
+++ adb shell getprop sys.boot_completed
+++ tr -d '\r'
++ boot='++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1'
++ '[' '++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1' = 1 ']'
++ sleep 5
++ for i in $(seq 1 60)
+++ adb shell getprop sys.boot_completed
+++ tr -d '\r'
++ boot='++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1'
++ '[' '++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1' = 1 ']'
++ sleep 5
++ for i in $(seq 1 60)
+++ adb shell getprop sys.boot_completed
+++ tr -d '\r'
++ boot='++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1'
++ '[' '++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1' = 1 ']'
++ sleep 5
++ for i in $(seq 1 60)
+++ adb shell getprop sys.boot_completed
+++ tr -d '\r'
++ boot='++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1'
++ '[' '++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1' = 1 ']'
++ sleep 5
++ for i in $(seq 1 60)
+++ adb shell getprop sys.boot_completed
+++ tr -d '\r'
++ boot='++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1'
++ '[' '++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1' = 1 ']'
++ sleep 5
++ for i in $(seq 1 60)
+++ adb shell getprop sys.boot_completed
+++ tr -d '\r'
++ boot='++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1'
++ '[' '++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1' = 1 ']'
++ sleep 5
++ for i in $(seq 1 60)
+++ adb shell getprop sys.boot_completed
+++ tr -d '\r'
++ boot='++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1'
++ '[' '++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1' = 1 ']'
++ sleep 5
++ for i in $(seq 1 60)
+++ adb shell getprop sys.boot_completed
+++ tr -d '\r'
++ boot='++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1'
++ '[' '++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1' = 1 ']'
++ sleep 5
++ for i in $(seq 1 60)
+++ adb shell getprop sys.boot_completed
+++ tr -d '\r'
++ boot='++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1'
++ '[' '++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1' = 1 ']'
++ sleep 5
++ for i in $(seq 1 60)
+++ adb shell getprop sys.boot_completed
+++ tr -d '\r'
++ boot='++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1'
++ '[' '++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1' = 1 ']'
++ sleep 5
++ for i in $(seq 1 60)
+++ adb shell getprop sys.boot_completed
+++ tr -d '\r'
++ boot='++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1'
++ '[' '++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1' = 1 ']'
++ sleep 5
++ for i in $(seq 1 60)
+++ adb shell getprop sys.boot_completed
+++ tr -d '\r'
++ boot='++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1'
++ '[' '++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1' = 1 ']'
++ sleep 5
++ for i in $(seq 1 60)
+++ adb shell getprop sys.boot_completed
+++ tr -d '\r'
++ boot='++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1'
++ '[' '++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1' = 1 ']'
++ sleep 5
++ for i in $(seq 1 60)
+++ adb shell getprop sys.boot_completed
+++ tr -d '\r'
++ boot='++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1'
++ '[' '++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1' = 1 ']'
++ sleep 5
++ for i in $(seq 1 60)
+++ adb shell getprop sys.boot_completed
+++ tr -d '\r'
++ boot='++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1'
++ '[' '++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1' = 1 ']'
++ sleep 5
++ for i in $(seq 1 60)
+++ adb shell getprop sys.boot_completed
+++ tr -d '\r'
++ boot='++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1'
++ '[' '++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1' = 1 ']'
++ sleep 5
++ for i in $(seq 1 60)
+++ adb shell getprop sys.boot_completed
+++ tr -d '\r'
++ boot='++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1'
++ '[' '++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1' = 1 ']'
++ sleep 5
++ for i in $(seq 1 60)
+++ adb shell getprop sys.boot_completed
+++ tr -d '\r'
++ boot='++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1'
++ '[' '++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1' = 1 ']'
++ sleep 5
++ for i in $(seq 1 60)
+++ adb shell getprop sys.boot_completed
+++ tr -d '\r'
++ boot='++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1'
++ '[' '++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1' = 1 ']'
++ sleep 5
++ for i in $(seq 1 60)
+++ adb shell getprop sys.boot_completed
+++ tr -d '\r'
++ boot='++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1'
++ '[' '++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1' = 1 ']'
++ sleep 5
++ for i in $(seq 1 60)
+++ adb shell getprop sys.boot_completed
+++ tr -d '\r'
++ boot='++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1'
++ '[' '++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1' = 1 ']'
++ sleep 5
++ for i in $(seq 1 60)
+++ adb shell getprop sys.boot_completed
+++ tr -d '\r'
++ boot='++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1'
++ '[' '++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1' = 1 ']'
++ sleep 5
++ for i in $(seq 1 60)
+++ adb shell getprop sys.boot_completed
+++ tr -d '\r'
++ boot='++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1'
++ '[' '++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1' = 1 ']'
++ sleep 5
++ for i in $(seq 1 60)
+++ adb shell getprop sys.boot_completed
+++ tr -d '\r'
++ boot='++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1'
++ '[' '++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1' = 1 ']'
++ sleep 5
++ for i in $(seq 1 60)
+++ adb shell getprop sys.boot_completed
+++ tr -d '\r'
++ boot='++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1'
++ '[' '++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1' = 1 ']'
++ sleep 5
++ for i in $(seq 1 60)
+++ adb shell getprop sys.boot_completed
+++ tr -d '\r'
++ boot='++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1'
++ '[' '++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1' = 1 ']'
++ sleep 5
++ for i in $(seq 1 60)
+++ adb shell getprop sys.boot_completed
+++ tr -d '\r'
++ boot='++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1'
++ '[' '++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1' = 1 ']'
++ sleep 5
++ for i in $(seq 1 60)
+++ adb shell getprop sys.boot_completed
+++ tr -d '\r'
++ boot='++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1'
++ '[' '++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1' = 1 ']'
++ sleep 5
++ '[' '++ /c/Users/<user>/adb/adb.exe shell getprop sys.boot_completed
+1' = 1 ']'
++ fail_phase 20 'boot_completed never reached'
++ failure_code=20
++ shift
+++ phase_b_failure_name 20
+++ case "$1" in
+++ echo pre_exploit
++ echo SNU_PHASE_B_FAILURE=pre_exploit
+SNU_PHASE_B_FAILURE=pre_exploit
++ echo 'FATAL: boot_completed never reached'
+FATAL: boot_completed never reached
++ exit 20

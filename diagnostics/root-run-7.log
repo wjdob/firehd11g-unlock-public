@@ -1,0 +1,15 @@
+device=<SERIAL>
+boot_completed=1
+settling 120s (zygote observer + time service)
+assets already staged and verified (host marker /c/Users/<user>/firehd11g_unlock/stage1-root/port/.assets-staged.sha256); skipping staging
+** PHASE A: staging waiter (consumes this boot's one-shot) **
+note: inline trigger ignores payload file (/c/Users/<user>/firehd11g_unlock/stage1-root/port/scripts/rootsvc_payload.sh)
+nc: connect: Connection refused
+waiter armed (inline trigger); restore_value=1791253905495
+no bootstrap file needed; payload arrives via the 4325 root listener
+reboot before running reroot_after_boot.sh
+staging complete; rebooting to a fresh boot
+device=<SERIAL>
+boot_completed=1
+settling 120s (zygote observer + time service)
+FATAL: Phase B cannot start: time_update waiter is unarmed (NUMERIC(1791254072376)); re-stage it on a dedicated staging boot

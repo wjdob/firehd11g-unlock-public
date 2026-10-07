@@ -1,0 +1,37 @@
+; WinUSB function-driver INF for the Amazon/LK fastboot interface.
+; Used to bind a driver to USB\VID_1949&PID_05E0 so that `fastboot` (which
+; matches the 0xFF/0x42/0x03 interface class) can talk to the device.
+; See stage3-recovery/README.md section 0.1.
+
+[Version]
+Signature           = "$Windows NT$"
+Class               = USBDevice
+ClassGuid           = {88BAE032-5A81-49f0-BC3D-A4FF138216D6}
+Provider            = %ManufacturerName%
+;CatalogFile         = (omitted)
+DriverVer           = 10/06/2026,1.0.0.0
+PnpLockdown         = 1
+
+[Manufacturer]
+%ManufacturerName%  = Standard,NTamd64
+
+[Standard.NTamd64]
+%DeviceName%        = USB_Install, USB\VID_1949&PID_05E0
+
+[USB_Install]
+Include             = winusb.inf
+Needs               = WINUSB.NT
+
+[USB_Install.Services]
+Include             = winusb.inf
+Needs               = WINUSB.NT.Services
+
+[USB_Install.HW]
+AddReg              = Dev_AddReg
+
+[Dev_AddReg]
+HKR,,DeviceInterfaceGUIDs,0x10000,"{5f5f6a1e-3d2a-4b9c-9f1e-7a2b4c6d8e0f}"
+
+[Strings]
+ManufacturerName    = "Local"
+DeviceName          = "Android Fastboot (Amazon VID_1949 PID_05E0)"

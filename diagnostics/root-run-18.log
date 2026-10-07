@@ -1,0 +1,66 @@
+device=<SERIAL>
+boot_completed=1
+settling 120s (zygote observer + time service)
+assets already staged and verified (host marker /c/Users/<user>/firehd11g_unlock/stage1-root/port/.assets-staged.sha256); skipping staging
+** PHASE A: staging waiter (consumes this boot's one-shot) **
+note: inline trigger ignores payload file (/c/Users/<user>/firehd11g_unlock/stage1-root/port/scripts/rootsvc_payload.sh)
+nc: connect: Connection refused
+waiter armed (inline trigger); restore_value=1791268231609
+no bootstrap file needed; payload arrives via the 4325 root listener
+reboot before running reroot_after_boot.sh
+staging complete; rebooting to a fresh boot
+device=<SERIAL>
+boot_completed=1
+settling 120s (zygote observer + time service)
+waiter FIRED-AND-WAITING (property normalized; time_update loop alive)
+** PHASE B: root chain attempt 1/6 (carrier leak+write -> Permissive -> uid-0 waiter handoff) **
+
+== 1/7 boot state ==
+settling 45s before carrier injection
+waiter=FIRED-AND-WAITING (property normalized by time sync; time_update loop alive)
+boot=1 saved_time=1791268402886 restore_value=1791268231609 exemptions=null
+
+== boot-wiring precheck ==
+wiring_failure_lines=0
+
+== 2/7 carrier up on 127.0.0.1:43271 ==
+carrier absent -> spawn deterministic app_process64 carrier
+carrier respawned, PONG
+carrier_identity=IDV2	uid=10161	pid=9389	context=u:r:amazon_app:s0	groups=3003	elf=ELF64	abi=arm64-v8a	jni=/data/user/0/com.amazon.webview.chromium/files/sn/libhwbinder_target.arm64-v8a.so
+device_supported_abis=arm64-v8a,armeabi-v7a,armeabi
+carrier_pid=9389 carrier_uid_context=IDV2	uid=10161	pid=9389	context=u:r:amazon_app:s0	groups=3003	elf=ELF64	abi=arm64-v8a	jni=/data/user/0/com.amazon.webview.chromium/files/sn/libhwbinder_target.arm64-v8a.so
+carrier_abi=arm64-v8a carrier_elf_class=ELF64
+selected_jni_library=/data/user/0/com.amazon.webview.chromium/files/sn/libhwbinder_target.arm64-v8a.so selected_elf_class=UNKNOWN
+native_library=/data/user/0/com.amazon.webview.chromium/files/sn/libhwbinder_target.arm64-v8a.so native_elf_class=UNKNOWN
+note: shell-side ELF read unavailable (app_data_file); relying on the carrier's self-reported elf=ELF64 jni=/data/user/0/com.amazon.webview.chromium/files/sn/libhwbinder_target.arm64-v8a.so
+
+== 3/7 stateful leak (boot-spent on ENODATA; reboot to retry) ==
+HWBINDER_STATEFUL HWBINDER_STATEFUL result=0x5000000000000000 file=0x4444444444444444 node=0x24d5
+leak confirmed: HWBINDER_STATEFUL result=0x5000000000000000 file=0x4444444444444444 node=0x24d5
+
+== 4/7 write null to selinux_enforcing ==
+HWBINDER_STATEFUL_WRITE HWBINDER_STATEFUL_WRITE result=0x5100000000000000
+
+== 5/7 verify Permissive ==
+getenforce=Permissive
+
+== 6/7 wait for pre-armed uid-0 time_update handoff ==
+/c/Users/<user>/firehd11g_unlock/stage1-root/port/scripts/reroot_after_boot.sh: line 273: warning: command substitution: ignored null byte in input
+root_service=0
+u:r:time_update:s0
+--------- beginning of system
+--------- beginning of main
+saved_time_now=1791268402886
+time_update_svc=running
+
+== 7/7 exit-state guard ==
+saved_time_state=1791268402886
+saved_time numeric but != original (1791268231609) -> time_update rewrote it; persistence disarmed (safe)
+exemptions=null
+enforce=Permissive
+OK reroot flow complete
+
+persistence_state=NUMERIC(1791268402886)
+time_update waiter is disarmed for the next boot; re-rooting
+requires re-staging the waiter and a reboot (root_poc.sh <payload>).
+0

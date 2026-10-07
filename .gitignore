@@ -1,0 +1,76 @@
+# Large binaries - never commit
+*.bin
+*.img
+*.dat
+*.br
+*.elf
+*.gz
+
+# OTA and extraction artifacts
+7.3.1.9/
+ota-extract/
+ota-*/
+
+# Reference clones (documented in docs/references.md, re-clone as needed)
+refs/
+
+# Device dumps. Partition images may contain serials and unique data, so they are
+# never committed -- but the *documentation* around them must be, otherwise a
+# clone has no way to regenerate or verify a dump. The negations below are
+# required: without them a bare `git add -A` silently skips these three files.
+dumps/*
+!dumps/README.md
+!dumps/SHA256SUMS.txt
+!dumps/dump-small.sh
+diagnostics/*.gz
+diagnostics/config
+
+# Python
+__pycache__/
+*.pyc
+
+diagnostics/stage0-report.json
+
+OTAs/
+
+stage1-root/prebuilt-ps7319/
+
+*.upstream.bak
+
+# Reddit-guide MTK toolchain (third-party binaries, analyzed in stage2-unlock/README.md)
+stage2-unlock/mediatekTools/
+
+# Handoff bundle and its export.
+#
+# stage2a-unlock/ is a DISTRIBUTION SNAPSHOT: every file in it is a copy of a
+# tracked file (plus its own reviewer-facing README.md). Tracking the copies is
+# what made the bundle go stale twice -- an edit to the repo did not touch the
+# bundle, and the bundle was then zipped and shipped anyway.
+#
+# It is now generated on demand instead:
+#     python tools/sync-handoff-bundle.py     # copy from repo + rewrite MANIFEST.txt
+#     python tools/check-bundle-drift.py      # prove the bundle matches the repo
+#     & 'C:\Program Files\7-Zip\7z.exe' a -tzip -mx=9 stage2a-unlock<date>.zip stage2a-unlock
+#
+# Both the directory and the export stay out of git; the tracked source of truth
+# is the repo itself.
+stage2a-unlock/
+stage2a-unlock*.zip
+
+# Stage 4 builds the actor APK from app/ source, so the output is generated, not
+# source. `sh stage4-persistent/app/build.sh` recreates it; committing it would
+# mean shipping a binary that can silently drift from the source preflight checks.
+stage4-persistent/app/build/
+# Frontier-model repository assessments. These are external critiques kept for
+# reference; they are not part of the repo's own claims and must not be published
+# (they quote private paths and internal reasoning). Kept out of git and out of
+# the public export deliberately.
+docs/repository-assessment.md
+docs/*assessment*.md
+
+# Stage 1's staging marker. This records what was staged on THIS machine, for
+# THIS device and build -- it is local state, not repository content. It was
+# tracked once, which meant a fresh clone already had it and skipped the staging
+# that makes the chain work. root_poc.sh now writes a content-keyed marker and
+# only skips staging when device, build and carrier hash all still match.
+stage1-root/port/.assets-staged.*.sha256

@@ -1,0 +1,27 @@
+device=<SERIAL>
+boot_completed=1
+settling 120s (zygote observer + time service)
+assets already staged and verified (host marker /c/Users/<user>/firehd11g_unlock/stage1-root/port/.assets-staged.sha256); skipping staging
+** PHASE A: staging waiter (consumes this boot's one-shot) **
+note: inline trigger ignores payload file (/c/Users/<user>/firehd11g_unlock/stage1-root/port/scripts/rootsvc_payload.sh)
+nc: connect: Connection refused
+waiter armed (inline trigger); restore_value=1791255650981
+no bootstrap file needed; payload arrives via the 4325 root listener
+reboot before running reroot_after_boot.sh
+staging complete; rebooting to a fresh boot
+device=<SERIAL>
+boot_completed=1
+settling 120s (zygote observer + time service)
+waiter FIRED-AND-WAITING (property normalized; time_update loop alive)
+** PHASE B: root chain attempt 1/6 (carrier leak+write -> Permissive -> uid-0 waiter handoff) **
+
+== 1/7 boot state ==
+settling 45s before carrier injection
+waiter=FIRED-AND-WAITING (property normalized by time sync; time_update loop alive)
+boot=1 saved_time=1791255815147 restore_value=1791255650981 exemptions=null
+payload push attempt 1 failed; retrying in 10s
+payload push attempt 2 failed; retrying in 10s
+payload push attempt 3 failed; retrying in 10s
+SNU_PHASE_B_FAILURE=pre_exploit
+FATAL: payload push failed
+FATAL: Phase B aborted after pre-exploit validation/configuration failure (exit=20); automatic reboot would not make this deterministic failure safe

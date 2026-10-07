@@ -1,0 +1,18 @@
+
+== 1/7 boot state ==
+settling 45s before carrier injection
+waiter=FIRED-AND-WAITING (property normalized by time sync; time_update loop alive)
+boot=1 saved_time=1791254072376 restore_value=1791253905495 exemptions=null
+
+== boot-wiring precheck ==
+wiring_failure_lines=0
+
+== 2/7 carrier up on 127.0.0.1:43271 ==
+carrier absent -> spawn deterministic app_process64 carrier
+carrier injection attempt 1 not observed; waiting 30s before retry
+carrier injection attempt 2 not observed; waiting 30s before retry
+carrier injection attempt 3 not observed; waiting 30s before retry
+carrier injection attempt 4 not observed; waiting 30s before retry
+carrier injection attempt 5 not observed; waiting 30s before retry
+SNU_PHASE_B_FAILURE=carrier_start
+FATAL: carrier start failed before hwbinder was attempted

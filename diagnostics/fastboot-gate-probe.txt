@@ -1,0 +1,52 @@
+
+Var                      Verdict Output
+---                      ------- ------
+product                  ALLOWED product: trona Finished. Total time: 0.005s
+secure                   REFUSED getvar:secure FAILED (remote: 'the command you input is restricted on locked hw') Finished. Total time: 0.005s
+unlocked                 REFUSED getvar:unlocked FAILED (remote: 'the command you input is restricted on locked hw') Finished. Total time: 0.004s
+unlock_status            ALLOWED unlock_status: false Finished. Total time: 0.005s
+unlock_code              ALLOWED unlock_code: 0x201197ff6793b2aea071c15f Finished. Total time: 0.005s
+lock_state               REFUSED getvar:lock_state FAILED (remote: 'the command you input is restricted on locked hw') Finished. Total time: 0.005s
+locked                   REFUSED getvar:locked FAILED (remote: 'the command you input is restricted on locked hw') Finished. Total time: 0.005s
+serialno                 ALLOWED serialno: <SERIAL> Finished. Total time: 0.005s
+serial                   REFUSED getvar:serial FAILED (remote: 'the command you input is restricted on locked hw') Finished. Total time: 0.004s
+version                  REFUSED getvar:version FAILED (remote: 'the command you input is restricted on locked hw') Finished. Total time: 0.004s
+version-bootloader       REFUSED getvar:version-bootloader FAILED (remote: 'the command you input is restricted on locked hw') Finished. Total time: 0.004s
+version-baseband         REFUSED getvar:version-baseband FAILED (remote: 'the command you input is restricted on locked hw') Finished. Total time: 0.004s
+version-hardware         REFUSED getvar:version-hardware FAILED (remote: 'the command you input is restricted on locked hw') Finished. Total time: 0.005s
+max-download-size        ALLOWED max-download-size: 0x8000000 Finished. Total time: 0.005s
+slot-count               ALLOWED slot-count: 0 Finished. Total time: 0.005s
+current-slot             REFUSED getvar:current-slot FAILED (remote: 'the command you input is restricted on locked hw') Finished. Total time: 0.004s
+hw-revision              REFUSED getvar:hw-revision FAILED (remote: 'the command you input is restricted on locked hw') Finished. Total time: 0.004s
+battery-voltage          REFUSED getvar:battery-voltage FAILED (remote: 'the command you input is restricted on locked hw') Finished. Total time: 0.004s
+off-mode-charge          REFUSED getvar:off-mode-charge FAILED (remote: 'the command you input is restricted on locked hw') Finished. Total time: 0.004s
+is-userspace             REFUSED getvar:is-userspace FAILED (remote: 'the command you input is restricted on locked hw') Finished. Total time: 0.004s
+variant                  REFUSED getvar:variant FAILED (remote: 'the command you input is restricted on locked hw') Finished. Total time: 0.005s
+kernel                   REFUSED getvar:kernel FAILED (remote: 'the command you input is restricted on locked hw') Finished. Total time: 0.004s
+bootloader               REFUSED getvar:bootloader FAILED (remote: 'the command you input is restricted on locked hw') Finished. Total time: 0.004s
+baseband                 REFUSED getvar:baseband FAILED (remote: 'the command you input is restricted on locked hw') Finished. Total time: 0.004s
+cpuid                    REFUSED getvar:cpuid FAILED (remote: 'the command you input is restricted on locked hw') Finished. Total time: 0.004s
+hwcode                   REFUSED getvar:hwcode FAILED (remote: 'the command you input is restricted on locked hw') Finished. Total time: 0.004s
+imei                     REFUSED getvar:imei FAILED (remote: 'the command you input is restricted on locked hw') Finished. Total time: 0.004s
+display_panel            REFUSED getvar:display_panel FAILED (remote: 'the command you input is restricted on locked hw') Finished. Total time: 0.004s
+wifi_mac                 REFUSED getvar:wifi_mac FAILED (remote: 'the command you input is restricted on locked hw') Finished. Total time: 0.004s
+bt_mac                   REFUSED getvar:bt_mac FAILED (remote: 'the command you input is restricted on locked hw') Finished. Total time: 0.004s
+build-date               REFUSED getvar:build-date FAILED (remote: 'the command you input is restricted on locked hw') Finished. Total time: 0.004s
+ro.build.date.utc        REFUSED getvar:ro.build.date.utc FAILED (remote: 'the command you input is restricted on locked hw') Finished. Total time: 0.004s
+boot_para                REFUSED getvar:boot_para FAILED (remote: 'the command you input is restricted on locked hw') Finished. Total time: 0.004s
+dram_fatal               REFUSED getvar:dram_fatal FAILED (remote: 'the command you input is restricted on locked hw') Finished. Total time: 0.004s
+token                    REFUSED getvar:token FAILED (remote: 'the command you input is restricted on locked hw') Finished. Total time: 0.004s
+partition-size:boot      REFUSED getvar:partition-size:boot FAILED (remote: 'the command you input is restricted on locked hw') Finished. Total time: 0.004s
+partition-type:boot      REFUSED getvar:partition-type:boot FAILED (remote: 'the command you input is restricted on locked hw') Finished. Total time: 0.004s
+partition-size:lk        REFUSED getvar:partition-size:lk FAILED (remote: 'the command you input is restricted on locked hw') Finished. Total time: 0.004s
+partition-size:preloader REFUSED getvar:partition-size:preloader FAILED (remote: 'the command you input is restricted on locked hw') Finished. Total time: 0.004s
+partition-size:userdata  REFUSED getvar:partition-size:userdata FAILED (remote: 'the command you input is restricted on locked hw') Finished. Total time: 0.005s
+partition-type:userdata  REFUSED getvar:partition-type:userdata FAILED (remote: 'the command you input is restricted on locked hw') Finished. Total time: 0.005s
+partition-size:metadata  REFUSED getvar:partition-size:metadata FAILED (remote: 'the command you input is restricted on locked hw') Finished. Total time: 0.005s
+erase-block-size         REFUSED getvar:erase-block-size FAILED (remote: 'the command you input is restricted on locked hw') Finished. Total time: 0.004s
+logical-block-size       REFUSED getvar:logical-block-size FAILED (remote: 'the command you input is restricted on locked hw') Finished. Total time: 0.005s
+max-fetch-size           REFUSED getvar:max-fetch-size FAILED (remote: 'the command you input is restricted on locked hw') Finished. Total time: 0.004s
+downloadsize             REFUSED getvar:downloadsize FAILED (remote: 'the command you input is restricted on locked hw') Finished. Total time: 0.004s
+battery-soc-ok           REFUSED getvar:battery-soc-ok FAILED (remote: 'the command you input is restricted on locked hw') Finished. Total time: 0.004s
+security                 REFUSED getvar:security FAILED (remote: 'the command you input is restricted on locked hw') Finished. Total time: 0.004s
+

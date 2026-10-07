@@ -1,0 +1,62 @@
+=== reserved-memory nodes ===
+#address-cells
+#size-cells
+consys-reserve-memory
+linux,phandle
+mblock-1-atf-reserved
+mblock-2-SSPM-reserved
+mblock-3-vpu_binary
+mblock-4-SPM-reserved
+mblock-5-mtktee-reserved
+mblock-6-framebuffer
+mdump-reserved-memory@0x602c0000
+minirdump-reserved-memory@544f0000
+name
+phandle
+pstore-reserved-memory@54410000
+ram_console-reserved-memory@54400000
+ranges
+reserve-memory-dram_r0_dummy_read
+reserve-memory-sspm_share
+zone-movable-cma-memory
+
+=== per-node reg (addr size) + flags ===
+--- consys-reserve-memory
+(no reg)
+  no-map=
+  size= 
+--- mblock-1-atf-reserved
+ 00 00 00 00 54 60 00 00 00 00 00 00 00 04 00 00
+  no-map=
+--- mblock-2-SSPM-reserved
+ 00 00 00 00 6f c4 00 00 00 00 00 00 00 0c 00 00
+  no-map=
+--- mblock-3-vpu_binary
+ 00 00 00 00 6d 23 00 00 00 00 00 00 02 a1 00 00
+  no-map=
+--- mblock-4-SPM-reserved
+ 00 00 00 00 6d 22 00 00 00 00 00 00 00 01 00 00
+  no-map=
+--- mblock-5-mtktee-reserved
+ 00 00 00 00 64 40 00 00 00 00 00 00 08 e0 00 00
+  no-map=
+--- mblock-6-framebuffer
+ 00 00 00 00 62 4e 00 00 00 00 00 00 01 f2 00 00
+--- mdump-reserved-memory@0x602c0000
+ 00 00 00 00 6f fc 00 00 00 00 00 00 00 04 00 00
+--- minirdump-reserved-memory@544f0000
+ 00 00 00 00 54 4f 00 00 00 00 00 00 00 01 00 00
+--- pstore-reserved-memory@54410000
+ 00 00 00 00 54 41 00 00 00 00 00 00 00 0e 00 00
+--- ram_console-reserved-memory@54400000
+ 00 00 00 00 54 40 00 00 00 00 00 00 00 01 00 00
+--- reserve-memory-dram_r0_dummy_read
+(no reg)
+  size=
+--- reserve-memory-sspm_share
+(no reg)
+  no-map=
+  status=okay
+  size=Q
+--- zone-movable-cma-memory
+(no reg)

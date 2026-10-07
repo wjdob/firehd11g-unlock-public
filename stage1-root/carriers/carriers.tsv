@@ -1,0 +1,36 @@
+# Root-chain carrier registry: single source of truth.
+#
+# Columns (TAB-separated):
+#   PS-token  variant-key  selinux_enforcing  carrier-sha256  verified-incrementals
+#
+# PS-token: the ro.build.id prefix of the device (e.g. PS7319, PS7326.3178N
+#   -> PS7326). Matched by prefix against the device's ro.build.id.
+# variant-key: directory under carriers/ holding libhwbinder_target.so.
+#   One variant may serve several PS tokens (PS7321 and PS7326 share an
+#   address; the kernel BSS layout was stable across those builds).
+# selinux_enforcing: the VA the variant's NULL-write targets. Derived
+#   offline from the version's OTA via tools/extract-symbols.py
+#   (enforcing_setup anchor; validated 3/3 against ground truths - see
+#   tools/kernel-symbols.md). NEVER guess this value.
+# carrier-sha256: sha256 of carriers/<variant-key>/libhwbinder_target.so.
+# verified-incrementals: comma-separated ro.build.version.incremental values
+#   that have been LIVE-verified against this variant, or EMPTY for none.
+#
+#   Why this column exists: ro.build.id selects an address FAMILY, but the
+#   address itself belongs to the exact kernel build. PS7319/1726 and
+#   PS7319/1735 share the token -- and happened to share the address, which was
+#   only established by dumping the running kernel. Treating a token match as a
+#   compatibility match would let a build nobody analysed reach a kernel write,
+#   so version_env.sh refuses unless the incremental is listed here (or the
+#   caller sets SNUSNU_ALLOW_UNVERIFIED_BUILD=1, which is logged).
+#
+#   An empty column is not "unknown", it is "no build of this variant has been
+#   live-verified"; those variants still work, but only via the explicit
+#   override, which keeps the default path safe.
+#
+# All variants are built from the run-18 live-proven base (10 ms wait
+# patch, docs/ENODATA-ANALYSIS.md) via stage1-root/make-carrier.py.
+PS7319	ps7319	0xffffff8009965628	8b71c71da7b8b77fcaa854b013b5f87054e3881e60918ced3c18af4b20586696	0020367984516
+PS7321	ps7321-ps7326	0xffffff8009969668	60593c15365942bddfb3ac4492bdc39042ebf13357abbe7f784ea76079391eb0	
+PS7326	ps7321-ps7326	0xffffff8009969668	60593c15365942bddfb3ac4492bdc39042ebf13357abbe7f784ea76079391eb0	
+PS7331	ps7331	0xffffff8009971668	2e573379cd13b900525f84cd5b4482c470e54c943937234d693161f7037dee47	

@@ -1,0 +1,10 @@
+device=<SERIAL>
+boot_completed=1
+settling 45s (zygote observer + time service)
+assets already staged and verified (host marker /c/Users/<user>/firehd11g_unlock/stage1-root/port/.assets-staged.sha256); skipping staging
+** PHASE A: staging waiter (consumes this boot's one-shot) **
+note: inline trigger ignores payload file (/c/Users/<user>/firehd11g_unlock/stage1-root/port/scripts/rootsvc_payload.sh)
+nc: connect: Connection refused
+nc: connect: Connection refused
+FATAL: uid-1000 staging listener failed: 
+FATAL: staging failed
