@@ -1,0 +1,2 @@
+getvar:all                                         FAILED (remote: 'the command you input is restricted on locked hw')
+Finished. Total time: 0.004s

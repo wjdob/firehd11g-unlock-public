@@ -1,0 +1,87 @@
+DRAM map of the live PS7319/1735 device (read-only collection, 2026-10-06)
+==========================================================================
+Device : <SERIAL> (trona / KFTRWI), PS7319, build 0020367984516
+Access : root via the stage1 listener (uid=0, u:r:time_update:s0), SELinux Permissive
+Writes : none to any boot/system/vendor partition. Two read-only dumps only.
+Sources: /proc/iomem, /sys/firmware/devicetree/base/reserved-memory/*, /proc/cmdline
+
+1. System RAM (from /proc/iomem)
+-------------------------------
+40000000-545fffff : System RAM      (kernel code 40080000-4118afff, kernel data 41724000-41ffafff)
+54640000-643fffff : System RAM
+6d200000-6d21ffff : System RAM      (128 KB isolated bank)
+6fd00000-9faeffff : System RAM
+a0000000-bfdfffff : System RAM
+c0000000-ffffffff : System RAM
+
+Holes inside the "RAM" span (not declared to the kernel):
+  54600000-5463ffff  (256 KB)  <- mblock-1-atf-reserved
+  64400000-6d1fffff            <- mblock-5-mtktee-reserved
+  6d220000-6d22ffff            <- mblock-4-SPM-reserved
+  6d230000-6fc3ffff            <- mblock-3-vpu_binary
+  6fc40000-6fcfffff            <- mblock-2-SSPM-reserved
+  9faf0000-9fffffff
+  bfe00000-bfffffff
+
+2. Device-tree reserved-memory (the preloader's mblock output, via LK)
+----------------------------------------------------------------------
+node                                     addr        size      note
+mblock-1-atf-reserved                    0x54600000  0x40000   no-map
+mblock-2-SSPM-reserved                   0x6fc40000  0xc0000   no-map
+mblock-3-vpu_binary                      0x6d230000  0x2a10000 no-map
+mblock-4-SPM-reserved                    0x6d220000  0x10000   no-map
+mblock-5-mtktee-reserved                 0x64400000  0x8e00000 no-map
+mblock-6-framebuffer                     0x624e0000  0x1f20000
+mdump-reserved-memory@0x602c0000         0x6ffc0000  0x40000
+minirdump-reserved-memory@0x544f0000     0x544f0000  0x10000
+pstore-reserved-memory@0x54410000        0x54410000  0xe0000
+ram_console-reserved-memory@0x54400000   0x54400000  0x10000
+consys-reserve-memory                    (no reg)
+reserve-memory-dram_r0_dummy_read        (no reg)
+reserve-memory-sspm_share                (no reg)
+zone-movable-cma-memory                  (no reg)
+
+3. What this means for the LK load window (0x56000000-0x56900000)
+-----------------------------------------------------------------
+* Nothing is reserved between 0x54640000 and 0x624e0000, so the whole span
+  0x56000000 -> 0x624e0000 (minus the ATF hole at 0x54600000, which is
+  BELOW the window) is unreserved DRAM.  An oversized LK read that runs
+  past 0x56900000 therefore does not clobber any reserved mblock until it
+  reaches the framebuffer (0x624e0000), 0xe4e0000 past the window start.
+* The preloader's own DRAM working set is BELOW the window:
+  g_dram_buf = 0x44800000 (see stage2-unlock/README.md), footprint
+  >= 0x44800000-0x448a3ac0.  An upward copy from 0x56000000 cannot reach it.
+* Only identified preloader structure ABOVE the window is the MTK context
+  save/restore slot at 0x5f100c00 (SP at +0x24, LR at +0x28, CPSR at +0x2c).
+
+4. GPT (from dumps/trona-1735/gpt-primary.bin), relevant partitions
+--------------------------------------------------------------------
+lk        LBA 22592-24639    1 MiB      (image occupies 0x93af0 of it)
+tee1      LBA 24640-34879    5 MiB
+tee2      LBA 34880-45119    5 MiB
+metadata  LBA 45120-110655   32 MiB
+boot_para LBA 110656-112703  1 MiB
+nvcfg     LBA 112704-129087  8 MiB
+spmfw     LBA 129088-131135  1 MiB
+sspm_1    LBA 131136-133183  1 MiB
+cam_vpu1  LBA 133184-163903  15 MiB
+cam_vpu2  LBA 163904-229439  32 MiB
+cam_vpu3  LBA 229440-260159  15 MiB
+boot      LBA 260160-325695  32 MiB
+recovery  LBA 325696-409599  41 MiB
+cache     LBA 409600-1523711 544 MiB
+system    LBA 1523712-8962047
+vendor    LBA 8962048-9781247
+userdata  LBA 9781248-122142686
+
+Because the preloader's block read is bounded by the *card*, not by the
+partition, a read that starts at the lk partition and runs long walks
+straight through tee1/tee2/metadata/... in order.  Mapping (destination =
+0x56000000 + X, X = bytes read past the start of the LK partition):
+  tee1     -> 0x56100000 ..
+  recovery -> 0x5f400000 ..
+  cache    -> 0x61bf0000 ..
+i.e. only `recovery` and `cache` content can be steered into the
+0x5f000000+ range where the 0x5f100c00 context slot lives, and neither is
+writable while the bootloader is locked.  That is the blocker for turning
+the oversized-read primitive into a control-flow hijack.

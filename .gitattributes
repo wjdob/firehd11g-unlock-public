@@ -1,0 +1,48 @@
+# Line-ending policy.
+#
+# This matters for correctness, not just tidiness: a shell script committed with
+# CRLF line endings fails on Linux/macOS with
+#
+#     /bin/sh^M: bad interpreter: No such file or directory
+#
+# because the kernel treats the trailing CR as part of the interpreter path. The
+# scripts in this repository are run from Git Bash on Windows, from Linux, and
+# from macOS, so they are pinned to LF.
+#
+# `text=auto` normalises everything else to LF in the repository, and git checks
+# out LF on all platforms. Windows editors handle LF fine; the binaries are
+# explicitly excluded so nothing rewrites them.
+* text=auto eol=lf
+
+# Shell and Python: LF is mandatory (see above).
+*.sh            text eol=lf
+*.py            text eol=lf
+*.cdf           text eol=lf
+
+# PowerShell and batch: LF works, and keeping the repo uniform avoids the
+# mixed-ending diffs that come from per-platform checkout rules.
+*.ps1           text eol=lf
+*.bat           text eol=lf
+
+# Prose and data: LF.
+*.md            text eol=lf
+*.MD            text eol=lf
+*.txt           text eol=lf
+*.json          text eol=lf
+*.xml           text eol=lf
+
+# Never touch these. `-text` disables any conversion, including CRLF mangling on
+# checkout, which would corrupt them.
+*.bin           -text
+*.img           -text
+*.dat           -text
+*.br            -text
+*.gz            -text
+*.so            -text
+*.apk           -text
+*.jar           -text
+*.der           -text
+*.cat           -text
+*.msi           -text
+*.zip           -text
+*.pfx           -text

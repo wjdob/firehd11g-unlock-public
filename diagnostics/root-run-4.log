@@ -1,0 +1,5 @@
+device=<SERIAL>
+boot_completed=1
+starting uid-10161 staging channel (consumes this boot's one-shot)
+FATAL: could not start uid-10161 staging channel (one-shot may be spent; reboot and retry)
+FATAL: initial-root asset staging failed

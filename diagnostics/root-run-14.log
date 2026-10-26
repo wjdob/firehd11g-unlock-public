@@ -1,0 +1,68 @@
+device=<SERIAL>
+boot_completed=1
+settling 120s (zygote observer + time service)
+starting uid-10161 staging channel (consumes this boot's one-shot)
+/c/Users/<user>/firehd11g_unlock/stage1-root/port/scripts/stage_initial_root_assets.sh: line 108: warning: command substitution: ignored null byte in input
+installing agent.jar
+installing libcodex_jni.so
+installing libhwbinder_target.so
+installing libhwbinder_target.arm64-v8a.so
+installing libhwbinder_target.armeabi-v7a.so
+installing carrier_launcher.sh
+agent.jar=ready sha256=0d49be2d453a29d0f118bc93623a9f8abde31f36137b6f1e1d3b7fc46d8aca8e
+libcodex_jni.so=ready sha256=cb9607a24d5ada10e0a173be3857e8801ac8f256af131eb64fa5f627b0dc76e6
+libhwbinder_target.so=ready sha256=e298c1f73cc45bd36e978c5f9efe58210533bf0f4889e77986b6ba2bf344298e
+libhwbinder_target.arm64-v8a.so=ready sha256=e298c1f73cc45bd36e978c5f9efe58210533bf0f4889e77986b6ba2bf344298e
+libhwbinder_target.armeabi-v7a.so=ready sha256=c630d48b8ecf86ab38c9abc58afeff9ba9baf68fb69c5f4c8ad960814f8373cf
+carrier_launcher.sh=ready sha256=da390d97eec8c5f0305467bfe4063e85373b261afcbfa86ddbecb4d36ad87a9f
+staging consumed this boot's one-shot; rebooting before arming
+device=<SERIAL>
+boot_completed=1
+settling 120s (zygote observer + time service)
+** PHASE A: staging waiter (consumes this boot's one-shot) **
+note: inline trigger ignores payload file (/c/Users/<user>/firehd11g_unlock/stage1-root/port/scripts/rootsvc_payload.sh)
+nc: connect: Connection refused
+waiter armed (inline trigger); restore_value=1791257225802
+no bootstrap file needed; payload arrives via the 4325 root listener
+reboot before running reroot_after_boot.sh
+staging complete; rebooting to a fresh boot
+device=<SERIAL>
+boot_completed=1
+settling 120s (zygote observer + time service)
+waiter FIRED-AND-WAITING (property normalized; time_update loop alive)
+** PHASE B: root chain attempt 1/6 (carrier leak+write -> Permissive -> uid-0 waiter handoff) **
+
+== 1/7 boot state ==
+settling 45s before carrier injection
+waiter=FIRED-AND-WAITING (property normalized by time sync; time_update loop alive)
+boot=1 saved_time=1791257399214 restore_value=1791257225802 exemptions=null
+
+== boot-wiring precheck ==
+wiring_failure_lines=0
+
+== 2/7 carrier up on 127.0.0.1:43271 ==
+carrier absent -> spawn deterministic app_process64 carrier
+carrier respawned, PONG
+carrier_identity=IDV2	uid=10161	pid=10045	context=u:r:amazon_app:s0	groups=3003	elf=ELF64	abi=arm64-v8a	jni=/data/user/0/com.amazon.webview.chromium/files/sn/libhwbinder_target.arm64-v8a.so
+device_supported_abis=arm64-v8a,armeabi-v7a,armeabi
+carrier_pid=10045 carrier_uid_context=IDV2	uid=10161	pid=10045	context=u:r:amazon_app:s0	groups=3003	elf=ELF64	abi=arm64-v8a	jni=/data/user/0/com.amazon.webview.chromium/files/sn/libhwbinder_target.arm64-v8a.so
+carrier_abi=arm64-v8a carrier_elf_class=ELF64
+selected_jni_library=/data/user/0/com.amazon.webview.chromium/files/sn/libhwbinder_target.arm64-v8a.so selected_elf_class=UNKNOWN
+native_library=/data/user/0/com.amazon.webview.chromium/files/sn/libhwbinder_target.arm64-v8a.so native_elf_class=UNKNOWN
+note: shell-side ELF read unavailable (app_data_file); relying on the carrier's self-reported elf=ELF64 jni=/data/user/0/com.amazon.webview.chromium/files/sn/libhwbinder_target.arm64-v8a.so
+
+== 3/7 stateful leak (boot-spent on ENODATA; reboot to retry) ==
+HWBINDER_STATEFUL HWBINDER_STATEFUL result=0x5000000000000000 file=0x4444444444444444 node=0x276b
+leak confirmed: HWBINDER_STATEFUL result=0x5000000000000000 file=0x4444444444444444 node=0x276b
+
+== 4/7 write null to selinux_enforcing ==
+HWBINDER_STATEFUL_WRITE HWBINDER_STATEFUL_WRITE result=0x5100000000000000
+
+== 5/7 verify Permissive ==
+getenforce=Permissive
+
+== 6/7 wait for pre-armed uid-0 time_update handoff ==
+root_service=
+SNU_PHASE_B_FAILURE=waiter_state
+FATAL: pre-armed time_update payload did not create the root service after successful Binder write
+FATAL: Phase B aborted after waiter state failure (exit=40); automatic reboot would not make this deterministic failure safe

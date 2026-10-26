@@ -1,0 +1,7 @@
+
+== 1/7 boot state ==
+settling 45s before carrier injection
+waiter=FIRED-AND-WAITING (property normalized by time sync; time_update loop alive)
+boot=1 saved_time=1791254072376 restore_value=1791253905495 exemptions=null
+SNU_PHASE_B_FAILURE=pre_exploit
+FATAL: payload push failed

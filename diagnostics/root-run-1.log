@@ -1,0 +1,6 @@
+device=<SERIAL>
+boot_completed=1
+starting uid-1000 staging channel
+installing agent.jar
+FATAL: transfer verification failed for agent.jar: /system/bin/sh: <stdin>[1]: can't create /data/securedStorageLocation/codex.amazon.jni.v51/agent.jar.new.b64: Permission denied
+FATAL: initial-root asset staging failed

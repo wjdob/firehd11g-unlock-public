@@ -1,0 +1,18 @@
+device=<SERIAL>
+boot_completed=1
+starting uid-10161 staging channel (consumes this boot's one-shot)
+/c/Users/<user>/firehd11g_unlock/stage1-root/port/scripts/stage_initial_root_assets.sh: line 100: warning: command substitution: ignored null byte in input
+installing agent.jar
+installing libcodex_jni.so
+installing libhwbinder_target.so
+installing libhwbinder_target.arm64-v8a.so
+installing libhwbinder_target.armeabi-v7a.so
+installing carrier_launcher.sh
+agent.jar=missing_or_mismatched expected=b50fc6b030db2e791c1b29125fc6e4a4d6dc166501b13c9c2552ec7881afc8a0 actual=absent
+libcodex_jni.so=missing_or_mismatched expected=cb9607a24d5ada10e0a173be3857e8801ac8f256af131eb64fa5f627b0dc76e6 actual=absent
+libhwbinder_target.so=missing_or_mismatched expected=e298c1f73cc45bd36e978c5f9efe58210533bf0f4889e77986b6ba2bf344298e actual=absent
+libhwbinder_target.arm64-v8a.so=missing_or_mismatched expected=e298c1f73cc45bd36e978c5f9efe58210533bf0f4889e77986b6ba2bf344298e actual=absent
+libhwbinder_target.armeabi-v7a.so=missing_or_mismatched expected=c630d48b8ecf86ab38c9abc58afeff9ba9baf68fb69c5f4c8ad960814f8373cf actual=absent
+carrier_launcher.sh=missing_or_mismatched expected=ed406c6726daaded1a0d19bd0ff3c79140283e0179768e1397f547a07303231c actual=absent
+FATAL: initial-root asset verification failed
+FATAL: initial-root asset staging failed

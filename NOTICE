@@ -1,0 +1,172 @@
+NOTICE
+======
+
+Third-party and vendor material redistributed in this repository, and the terms
+that apply.
+
+SPDX-License-Identifier for the original work: MIT (see LICENSE).
+The MIT license in LICENSE covers ONLY the original work authored here. Nothing in
+this file grants rights to the material listed below.
+
+This file exists so that the provenance of every non-original file is on the
+record, and so that rights holders have a single, obvious place to look. If you
+are a rights holder and want something removed, see "Removal requests" at the
+end -- that request will be honoured without argument.
+
+
+1. SnuSnuRoot -- GPL-3.0
+------------------------
+
+Upstream:  https://github.com/voidnullvalue/SnuSnuRoot
+Write-up:  https://voidnullvalue.github.io/SnuSnuRoot/
+License:   GPL-3.0 (full text in licenses/GPL-3.0.txt)
+
+The Stage 1 root chain in this repository is a port of SnuSnuRoot to Fire OS
+7.3.1.9 / PS7319. The following files are SnuSnuRoot build output, redistributed
+unmodified as a convenience so the port is runnable:
+
+    stage1-root/port/prebuilt/device/arm64-v8a/agent.jar
+    stage1-root/port/prebuilt/device/arm64-v8a/libcodex_jni.so
+    stage1-root/port/prebuilt/device/arm64-v8a/libhwbinder_target.so
+    stage1-root/port/prebuilt/device/arm64-v8a/snusnu_hwbinder_root
+    stage1-root/port/prebuilt/device/arm64-v8a/stub.apk
+    stage1-root/port/prebuilt/device/armeabi-v7a/libhwbinder_target.so
+    stage1-root/port/prebuilt/snusnu-persistence.apk
+
+The per-firmware carrier variants are builds of the same component and carry the
+same license:
+
+    stage1-root/carriers/ps7319/libhwbinder_target.so
+    stage1-root/carriers/ps7321-ps7326/libhwbinder_target.so
+    stage1-root/carriers/ps7331/libhwbinder_target.so
+
+Because these are GPL-3.0 binaries, the license text is included in full at
+licenses/GPL-3.0.txt, and the corresponding source is the upstream repository
+linked above. The corresponding source for the per-firmware carrier variants is
+the upstream project plus the build scripts under stage1-root/ in this
+repository.
+
+
+2. Magisk -- GPL-3.0
+--------------------
+
+Upstream:  https://github.com/topjohnwu/Magisk
+License:   GPL-3.0 (full text in licenses/GPL-3.0.txt)
+
+Two Magisk build artifacts are redistributed unmodified. They are used as
+tooling by the root chain -- to patch SELinux policy in memory and to provide a
+root daemon -- and are not modified by this project:
+
+    stage1-root/port/prebuilt/device/arm64-v8a/magisk
+    stage1-root/port/prebuilt/device/arm64-v8a/magiskpolicy
+
+Copyright for these binaries belongs to the Magisk authors (John Wu and
+contributors). licenses/GPL-3.0.txt accompanies them as the license requires.
+
+
+3. Amazon kernel sources -- GPL-2.0
+-----------------------------------
+
+Upstream:  https://github.com/vendor-mtk-sources/Amazon-Fire_HD10_11th_Gen
+Branch:    Amazon-Fire_HD10_11th_Gen-7.3.1.9-20210414
+
+No kernel source is redistributed here. It is used offline to derive facts
+recorded in prose, principally tools/kernel-symbols.md and the compatibility
+matrix in README.md. Those derivations are this project's own work; the source
+they were derived from is Amazon's, published under GPL-2.0 upstream.
+
+
+4. Amazon / MediaTek firmware-derived material -- no copyright claimed
+----------------------------------------------------------------------
+
+The following are extracted from firmware or hardware owned by the author, and
+are included because the analysis in this repository cannot be checked without
+them. Copyright in this material belongs to Amazon.com, Inc. or MediaTek Inc.
+**No copyright is claimed over any of it**, and it is included solely for
+interoperability and security research: to let a reader verify a claim against
+the same artifact the claim was derived from.
+
+    4a. Compiled SELinux policy and context mappings
+        diagnostics/sepolicy/*
+        (plat_sepolicy.cil, vendor_sepolicy.cil, rootable_*.cil,
+         precompiled_sepolicy, plat_*_contexts*, *_mac_permissions.xml,
+         *_seapp_contexts*)
+        -- extracted from the device's system/vendor partitions. These are the
+        inputs to the rootable-vs-stock policy delta described in
+        docs/HANDOFF.md.
+
+    4b. Public keys and certificates
+        stage2-unlock/lk-prod-ca-cert.der, lk-eng-ca-cert.der
+        stage2-unlock/unlock-pubkey.der, temp-unlock-pubkey.der
+        stage2-unlock/pl-image-verify-pubkey-modulus.bin
+        stage2-unlock/pl-image-verify-alt-pubkey-modulus.bin
+        stage2-unlock/pl-unlock-pubkey-modulus.bin
+        -- PUBLIC key material, extracted from the boot chain, present in every
+        shipped unit. Private keys are NOT included and are not derivable from
+        these. They are needed to let a reader check a dump of their own device
+        against the same trust anchors this analysis uses.
+
+    4c. Diagnostic output
+        diagnostics/*.log, diagnostics/*.txt
+        -- raw command output from the reference unit, reproduced as evidence
+        for the findings. Device-unique identifiers (serial, WiFi/Bluetooth MAC,
+        PSN/FSN) have been redacted; see docs/PUBLIC-RELEASE-AUDIT.md.
+
+    4d. OTA package metadata
+        -- OTAs are NOT redistributed. Only extracted offsets, sizes and
+        updater-script guards are quoted, in prose, in the documentation.
+
+
+5. Research-analysis documents -- this project's own work
+--------------------------------------------------------
+
+The analysis, the reverse engineering, the tooling and the writing are original
+to this project and covered by LICENSE (MIT). That includes docs/, tools/,
+stage0/, stage1-root/ (excepting the prebuilt binaries listed above),
+stage2-unlock/ (excepting the vendor key material listed in 4b) and
+stage3-recovery/.
+
+
+6. What this repository does NOT contain
+----------------------------------------
+
+Stated explicitly, because it is the question most often asked:
+
+  * **No bootloader unlock, and no way to obtain one.** The unlock mechanism is
+    documented and proven to require an Amazon-signed `unlock_code`. Forging one
+    requires Amazon's private key, which is not here and cannot be derived from
+    what is here.
+  * **No private keys of any kind** -- not Amazon's, not MediaTek's, and not a
+    valid signing key for any bootloader. A throwaway self-signed *host*
+    code-signing certificate is referenced in
+    stage3-recovery/host/winusb-fastboot/README.md; it signs a Windows driver INF
+    for a USB interface, is specific to one machine, and is unrelated to device
+    boot security.
+  * **No full firmware images.** Partition dumps are gitignored, and the
+    shareable bundle deliberately excludes the IDME partition (see
+    docs/PUBLIC-RELEASE-AUDIT.md).
+  * **No third-party vendor flashing tools.** The MediaTek tooling analysed in
+    stage2-unlock/README.md is not redistributed.
+
+
+7. Safety
+---------
+
+This is research into hardware the author owns. One documented outcome of
+getting it wrong is a **permanently bricked device** -- see
+docs/brick-analysis.md and the recovery matrix in stage3-recovery/README.md. The
+software is provided "as is", without warranty of any kind, as stated in LICENSE.
+If you run anything here, that is your decision and your risk.
+
+
+8. Removal requests
+-------------------
+
+If you are a rights holder and want any material in this repository removed,
+please open an issue or contact the author via the GitHub account `wjdob`. It
+will be removed promptly and without argument -- no justification required.
+
+The intent here is to publish original security research, not to redistribute
+anyone's proprietary material. Where vendor material is included it is because a
+specific claim in the analysis is unverifiable without it, and the file list in
+section 4 is the complete inventory of what that amounts to.
